@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    volumes:
+      - db:/var/lib/mongodb
+    networks:
+      - custom-network
+
+  theaterinbound:
+    depends_on:
+      -   mongodb
+    build:
+      context: ./
+      dockerfile: ./theater-inbound/Dockerfile
+    restart: on-failure
+    ports:
+      - 8080:8080
+    environment:
+      - CONNECTION_STRING=mongodb://mongodb:27017/test
+      - DB_NAME=test
+    volumes:
+      - .gradle:/root/.gradle
+    stdin_open: true
+    tty: true
+    networks:
+      - custom-network
+
+  theateroutbound:
+    depends_on:
+      - mongodb
+    build:
+      context: ./
+      dockerfile: ./theater-outbound/Dockerfile
+    restart: on-failure
+    ports:
+      - 8081:8081
+    environment:
+      - CONNECTION_STRING=mongodb://mongodb:27017/test
+      - DB_NAME=test
+    volumes:
+      - .gradle:/root/.gradle
+    stdin_open: true
+    tty: true
+    networks:
+      - custom-network
+
+networks:
+  custom-network:
+    driver: bridge
+volumes:
+  db:
