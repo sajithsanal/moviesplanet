@@ -1,6 +1,8 @@
 package com.moviesplanet.outbound.controller;
 
 import com.moviesplanet.outbound.service.TheaterOutboundService;
+import com.moviesplanet.theater.dto.MovieSearchRequest;
+import com.moviesplanet.theater.dto.MovieSearchResponse;
 import com.moviesplanet.theater.model.TheaterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,6 +28,13 @@ public class TheaterOutboundController {
     public TheaterEntity findTheaterDetails(@RequestParam("theaterName") String theaterName){
 
         return theaterOutboundService.findTheater(theaterName);
+
+    }
+
+    @PostMapping(value = "/api/movies", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public List<MovieSearchResponse> searchMovies(@RequestBody MovieSearchRequest request){
+
+        return theaterOutboundService.searchMovies(request);
 
     }
 }

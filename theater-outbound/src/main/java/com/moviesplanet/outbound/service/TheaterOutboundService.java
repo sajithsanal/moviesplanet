@@ -2,13 +2,22 @@ package com.moviesplanet.outbound.service;
 
 import com.moviesplanet.common.exception.CustomException;
 import com.moviesplanet.outbound.controller.TheaterOutboundControllerAdvice;
+import com.moviesplanet.theater.dto.MovieSearchRequest;
+import com.moviesplanet.theater.dto.MovieSearchResponse;
+import com.moviesplanet.theater.model.MovieDetails;
 import com.moviesplanet.theater.model.TheaterEntity;
 import com.moviesplanet.theater.repo.TheaterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +28,9 @@ public class TheaterOutboundService {
 
     @Autowired
     private TheaterRepository theaterRepository;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<TheaterEntity> findAll() {
 
@@ -39,6 +51,77 @@ public class TheaterOutboundService {
             throw new CustomException("Unable to find theater with theater Name " + theaterName);
 
         }
+
+    }
+
+    public List<MovieSearchResponse> searchMovies(MovieSearchRequest request) {
+
+//        List<TheaterEntity> theaterEntityList = theaterRepository.findByMovieName(request.getMovieName());
+        Query andQuery = new Query();
+        Criteria andCriteria = new Criteria();
+        List<Criteria> andExpression =  new ArrayList<>();
+
+
+        if (StringUtils.hasLength(request.getMovieName())) {
+            Criteria expression = new Criteria();
+            expression.and("movieShows.movieName").is(request.getMovieName());
+            andExpression.add(expression);
+
+        }
+        if (StringUtils.hasLength(request.getLanguage())) {
+            Criteria expression = new Criteria();
+            expression.and("movieShows.language").is(request.getLanguage());
+            andExpression.add(expression);
+        }
+        if (StringUtils.hasLength(request.getGenre())) {
+            Criteria expression = new Criteria();
+            expression.and("movieShows.genre").is(request.getGenre());
+            andExpression.add(expression);
+        }
+
+        if (StringUtils.hasLength(request.getCity())) {
+            Criteria expression = new Criteria();
+            expression.and("address.city").is(request.getCity());
+            andExpression.add(expression);
+        }
+
+        andQuery.addCriteria(andCriteria.andOperator(andExpression.toArray(new Criteria[andExpression.size()])));
+
+
+        List<TheaterEntity> theaterEntityList = mongoTemplate.find(andQuery, TheaterEntity.class);
+
+        List<MovieSearchResponse> responses = new ArrayList<>();
+
+        if (!CollectionUtils.isEmpty(theaterEntityList)) {
+            logger.info("Found total list of theaters  --> " + theaterEntityList.size());
+
+            theaterEntityList.forEach(entity -> {
+                entity.getMovieShows().forEach(movie -> {
+                    if((StringUtils.hasLength(request.getMovieName()) && request.getMovieName().equals(movie.getMovieName())) &&
+                            (StringUtils.hasLength(request.getLanguage()) && request.getLanguage().equals(movie.getLanguage())) &&
+                            (StringUtils.hasLength(request.getGenre()) && request.getGenre().equals(movie.getGenre())) &&
+                            (StringUtils.hasLength(request.getCity()) && request.getCity().equals(entity.getAddress().getCity())) ){
+
+                        MovieSearchResponse response = new MovieSearchResponse();
+                        response.setMovieName(movie.getMovieName());
+                        response.setLanguage(movie.getLanguage());
+                        response.setMovieDuration(movie.getMovieDuration());
+                        response.setSubTitle(movie.getSubtitle());
+                        response.setTheaterName(entity.getTheaterName());
+                        response.setTheaterAddress(entity.getAddress().toString());
+                        responses.add(response);
+                    }
+
+                });
+            });
+
+
+        } else {
+            logger.info("No Theaters found with the search criteria");
+        }
+
+        return responses;
+
 
     }
 

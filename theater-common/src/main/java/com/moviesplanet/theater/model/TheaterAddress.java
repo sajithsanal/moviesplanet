@@ -46,4 +46,14 @@ public class TheaterAddress {
     public void setPincode(String pincode) {
         this.pincode = pincode;
     }
+
+    @Override
+    public String toString() {
+        return "street1='" + street1 + '\'' +
+                ", street2='" + street2 + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", pincode='" + pincode + '\'' +
+                '}';
+    }
 }

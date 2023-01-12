@@ -5,8 +5,10 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 public class MongoDBConfig extends AbstractMongoClientConfiguration {
 
@@ -26,6 +28,11 @@ public class MongoDBConfig extends AbstractMongoClientConfiguration {
                 .build();
 
         return MongoClients.create(mongoClientSettings);
+    }
+
+    @Bean
+    public MongoTemplate mongoTemplate() throws Exception {
+        return new MongoTemplate(mongoClient(), getDatabaseName());
     }
 
 }

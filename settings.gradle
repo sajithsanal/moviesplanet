@@ -4,4 +4,6 @@ include 'common-module'
 include 'theater-common'
 include 'theater-inbound'
 include 'theater-outbound'
+include 'customer-outbound'
+include 'customer-common'
 
