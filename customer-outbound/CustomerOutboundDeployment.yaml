@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: customer
+  name: customer-outbound-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-outbound
+  template:
+    metadata:
+      labels:
+        app: customer-outbound
+    spec:
+      containers:
+        - image: moviesplanet_customeroutbound:latest
+          name: customer-outbound
+          imagePullPolicy: Never
+          env:
+            - name: CONNECTION_STRING
+              value: "mongodb://mongodb-service:27017/test"
+            - name: DB_NAME
+              value: "test"
+            - name: THEATER_OUTBOUND_SERVICE_URL
+              value: "http://theater-outbound-service:8081"
