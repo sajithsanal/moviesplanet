@@ -1,7 +1,7 @@
 package com.moviesplanet.theater.inbound.controller;
 
 import com.moviesplanet.theater.inbound.service.TheaterInboundService;
-import com.moviesplanet.theater.model.TheaterEntity;
+import com.moviesplanet.common.model.TheaterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

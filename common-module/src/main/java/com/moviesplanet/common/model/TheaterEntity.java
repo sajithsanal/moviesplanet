@@ -1,11 +1,10 @@
-package com.moviesplanet.theater.model;
+package com.moviesplanet.common.model;
 
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import javax.annotation.processing.Generated;
 import java.util.List;
 
 @Document(collection = "theaters")

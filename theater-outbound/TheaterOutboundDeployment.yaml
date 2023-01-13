@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: theater
+  name: theater-outbound-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: theater-outbound
+  template:
+    metadata:
+      labels:
+        app: theater-outbound
+    spec:
+      containers:
+        - image: moviesplanet_theateroutbound:latest
+          name: theater-outbound
+          imagePullPolicy: Never
+          env:
+            - name: CONNECTION_STRING
+              value: "mongodb://mongodb-service:27017/test"
+            - name: DB_NAME
+              value: "test"

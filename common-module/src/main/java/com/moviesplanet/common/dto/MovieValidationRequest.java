@@ -1,4 +1,4 @@
-package com.moviesplanet.theater.dto;
+package com.moviesplanet.common.dto;
 
 public class MovieValidationRequest {
 

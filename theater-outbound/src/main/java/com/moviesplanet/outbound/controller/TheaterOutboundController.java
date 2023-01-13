@@ -3,11 +3,10 @@ package com.moviesplanet.outbound.controller;
 import com.moviesplanet.outbound.service.TheaterOutboundService;
 import com.moviesplanet.theater.dto.MovieSearchRequest;
 import com.moviesplanet.theater.dto.MovieSearchResponse;
-import com.moviesplanet.theater.dto.MovieValidationRequest;
-import com.moviesplanet.theater.model.TheaterEntity;
+import com.moviesplanet.common.dto.MovieValidationRequest;
+import com.moviesplanet.common.model.TheaterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

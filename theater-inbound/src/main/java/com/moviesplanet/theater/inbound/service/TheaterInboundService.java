@@ -2,18 +2,14 @@ package com.moviesplanet.theater.inbound.service;
 
 import com.moviesplanet.common.exception.CustomException;
 import com.moviesplanet.common.util.CommonUtil;
-import com.moviesplanet.theater.inbound.controller.TheaterInboundControllerAdvice;
-import com.moviesplanet.theater.model.TheaterEntity;
+import com.moviesplanet.common.model.TheaterEntity;
 import com.moviesplanet.theater.repo.TheaterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Service

@@ -1,4 +1,4 @@
-package com.moviesplanet.theater.model;
+package com.moviesplanet.common.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

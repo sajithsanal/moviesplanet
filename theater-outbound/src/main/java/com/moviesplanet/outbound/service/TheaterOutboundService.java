@@ -1,13 +1,10 @@
 package com.moviesplanet.outbound.service;
 
 import com.moviesplanet.common.exception.CustomException;
-import com.moviesplanet.common.util.CommonUtil;
-import com.moviesplanet.outbound.controller.TheaterOutboundControllerAdvice;
 import com.moviesplanet.theater.dto.MovieSearchRequest;
 import com.moviesplanet.theater.dto.MovieSearchResponse;
-import com.moviesplanet.theater.dto.MovieValidationRequest;
-import com.moviesplanet.theater.model.MovieDetails;
-import com.moviesplanet.theater.model.TheaterEntity;
+import com.moviesplanet.common.dto.MovieValidationRequest;
+import com.moviesplanet.common.model.TheaterEntity;
 import com.moviesplanet.theater.repo.TheaterRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;

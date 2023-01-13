@@ -1,10 +1,9 @@
 package com.moviesplanet.theater.repo;
 
-import com.moviesplanet.theater.model.MovieDetails;
-import com.moviesplanet.theater.model.TheaterEntity;
+import com.moviesplanet.common.model.MovieDetails;
+import com.moviesplanet.common.model.TheaterEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
 import java.util.Optional;

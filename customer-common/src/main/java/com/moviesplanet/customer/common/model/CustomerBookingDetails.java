@@ -3,6 +3,7 @@ package com.moviesplanet.customer.common.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -17,13 +18,19 @@ public class CustomerBookingDetails {
 
     private String movieName;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date movieShowDate;
 
     private String timeOfTheShow;
 
-    private Timestamp bookingDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date bookingDate;
+
+    private String screenName;
 
     private String seatsSelected;
+
+    private int noOfSeatsBooked;
 
     private Boolean paymentCompleted;
 
@@ -31,10 +38,37 @@ public class CustomerBookingDetails {
 
     private String customerEmail;
 
-    private Timestamp insertDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date insertDate;
 
-    private Timestamp updateDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date updateDate;
 
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getNoOfSeatsBooked() {
+        return noOfSeatsBooked;
+    }
+
+    public void setNoOfSeatsBooked(int noOfSeatsBooked) {
+        this.noOfSeatsBooked = noOfSeatsBooked;
+    }
+
+    public String getScreenName() {
+        return screenName;
+    }
+
+    public void setScreenName(String screenName) {
+        this.screenName = screenName;
+    }
 
     public String getId() {
         return id;
@@ -60,13 +94,8 @@ public class CustomerBookingDetails {
         this.movieName = movieName;
     }
 
-    public Date getMovieShowDate() {
-        return movieShowDate;
-    }
 
-    public void setMovieShowDate(Date movieShowDate) {
-        this.movieShowDate = movieShowDate;
-    }
+
 
     public String getTimeOfTheShow() {
         return timeOfTheShow;
@@ -76,13 +105,8 @@ public class CustomerBookingDetails {
         this.timeOfTheShow = timeOfTheShow;
     }
 
-    public Timestamp getBookingDate() {
-        return bookingDate;
-    }
 
-    public void setBookingDate(Timestamp bookingDate) {
-        this.bookingDate = bookingDate;
-    }
+
 
     public String getSeatsSelected() {
         return seatsSelected;
@@ -116,19 +140,35 @@ public class CustomerBookingDetails {
         this.customerEmail = customerEmail;
     }
 
-    public Timestamp getInsertDate() {
+    public Date getMovieShowDate() {
+        return movieShowDate;
+    }
+
+    public void setMovieShowDate(Date movieShowDate) {
+        this.movieShowDate = movieShowDate;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public Date getInsertDate() {
         return insertDate;
     }
 
-    public void setInsertDate(Timestamp insertDate) {
+    public void setInsertDate(Date insertDate) {
         this.insertDate = insertDate;
     }
 
-    public Timestamp getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Timestamp updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 }
