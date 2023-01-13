@@ -1,11 +1,16 @@
 package com.moviesplanet.theater.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 import java.util.List;
 
 public class MovieDetails {
     private String movieName;
-    private String showStartDate;
-    private String showEndDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date showStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date showEndDate;
     private String language;
     private String genre;
     private String subtitle;
@@ -21,19 +26,19 @@ public class MovieDetails {
         this.movieName = movieName;
     }
 
-    public String getShowStartDate() {
+    public Date getShowStartDate() {
         return showStartDate;
     }
 
-    public void setShowStartDate(String showStartDate) {
+    public void setShowStartDate(Date showStartDate) {
         this.showStartDate = showStartDate;
     }
 
-    public String getShowEndDate() {
+    public Date getShowEndDate() {
         return showEndDate;
     }
 
-    public void setShowEndDate(String showEndDate) {
+    public void setShowEndDate(Date showEndDate) {
         this.showEndDate = showEndDate;
     }
 

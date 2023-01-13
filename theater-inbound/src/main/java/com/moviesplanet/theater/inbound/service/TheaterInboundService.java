@@ -1,6 +1,7 @@
 package com.moviesplanet.theater.inbound.service;
 
 import com.moviesplanet.common.exception.CustomException;
+import com.moviesplanet.common.util.CommonUtil;
 import com.moviesplanet.theater.inbound.controller.TheaterInboundControllerAdvice;
 import com.moviesplanet.theater.model.TheaterEntity;
 import com.moviesplanet.theater.repo.TheaterRepository;
@@ -36,7 +37,7 @@ public class TheaterInboundService {
         theaterEntity.setId(String.valueOf(System.currentTimeMillis()));
         TheaterEntity entity = theaterRepository.save(theaterEntity);
 
-        return createResponseObject("SUCCESS", "Created theater with id " + entity.getId());
+        return CommonUtil.createResponseObject("SUCCESS", "Created theater with id " + entity.getId());
 
     }
 
@@ -57,7 +58,7 @@ public class TheaterInboundService {
 
         }
 
-        return createResponseObject("SUCCESS", "Updated theater details with id " + theaterEntity.getId());
+        return CommonUtil.createResponseObject("SUCCESS", "Updated theater details with id " + theaterEntity.getId());
 
     }
 
@@ -76,21 +77,9 @@ public class TheaterInboundService {
 
         }
 
-        return createResponseObject("SUCCESS", "Deleted the details for theater " + theaterName);
+        return CommonUtil.createResponseObject("SUCCESS", "Deleted the details for theater " + theaterName);
 
     }
-    private ResponseEntity<Object> createResponseObject(String status, String message) {
 
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("status", status);
-        body.put("message", message);
-
-        logger.info(status + " --> " + message);
-
-
-        return new ResponseEntity<>(body, HttpStatus.OK);
-
-
-    }
 
 }
