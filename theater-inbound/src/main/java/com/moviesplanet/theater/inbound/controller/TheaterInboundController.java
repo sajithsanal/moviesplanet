@@ -8,13 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/theater-inbound")
 public class TheaterInboundController {
 
 
     @Autowired
     private TheaterInboundService theaterInboundService;
 
-    @PostMapping(value = "/api/theater", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/theater", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createTheaterDetails(@RequestBody TheaterEntity theaterEntity){
 
         return theaterInboundService.createTheater(theaterEntity);
@@ -22,14 +23,14 @@ public class TheaterInboundController {
     }
 
 
-    @PutMapping(value = "/api/theater", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/theater", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updateTheaterDetails(@RequestBody TheaterEntity theaterEntity){
 
         return theaterInboundService.updateTheaterDetails(theaterEntity);
 
     }
 
-    @DeleteMapping(value = "/api/theater", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/theater", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updateTheaterDetails(@RequestParam("theaterName") String theaterName){
 
         return theaterInboundService.deleteTheaterDetails(theaterName);
