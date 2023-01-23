@@ -11,31 +11,32 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 
 @RestController
+@RequestMapping("/api/customer")
 public class CustomerOutboundController {
 
     @Autowired
     private CustomerOutboundService customerOutboundService;
 
 
-    @PostMapping(value = "/api/customer/movie-booking", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/movie-booking", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody MovieShowDetailResponse getMovieBookingDetails(@RequestBody MovieValidationRequest request) throws JsonProcessingException {
 
         return customerOutboundService.getMovieShowDetails(request);
     }
 
-    @PostMapping(value = "/api/customer/seat-availability", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/seat-availability", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody SeatAvailabilityResponse getSeatDetails(@RequestBody SeatAvailabilityRequest request) throws JsonProcessingException {
 
         return customerOutboundService.getSeatAvailabilityDetails(request);
     }
 
-    @PostMapping(value = "/api/customer/book-ticket", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/book-ticket", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody TicketBookingResponse bookTicket(@RequestBody TicketBookingReq request) throws JsonProcessingException, ParseException {
 
         return customerOutboundService.bookTicket(request);
     }
 
-    @GetMapping(value = "/api/customer/ticket", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/ticket", produces = MediaType.APPLICATION_JSON_VALUE)
     public TicketBookingResponse getBookingDetails(@RequestParam(required = false) String mobile, @RequestParam(required = false) String email){
 
         return customerOutboundService.getBookingDetails(email,mobile);
