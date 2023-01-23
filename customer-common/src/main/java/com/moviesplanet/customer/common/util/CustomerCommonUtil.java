@@ -21,7 +21,7 @@ public class CustomerCommonUtil {
         TheaterEntity theaterEntity;
         RestTemplate restTemplate = new RestTemplate();
         String theaterOutboundServiceUrl = System.getenv().get("THEATER_OUTBOUND_SERVICE_URL");
-        String finalUrl = theaterOutboundServiceUrl + "/api/movie/validate";
+        String finalUrl = theaterOutboundServiceUrl + "/api/theater-outbound/movie/validate";
         logger.info("final URL is " + finalUrl);
         ResponseEntity<String> response = restTemplate.postForEntity(finalUrl, request, String.class);
         String responseBody = response.getBody();
@@ -42,7 +42,7 @@ public class CustomerCommonUtil {
         TheaterEntity theaterEntity;
         RestTemplate restTemplate = new RestTemplate();
         String theaterOutboundServiceUrl = System.getenv().get("THEATER_OUTBOUND_SERVICE_URL");
-        String finalUrl = theaterOutboundServiceUrl + "/api/theater?theaterName={theaterName}";
+        String finalUrl = theaterOutboundServiceUrl + "/api/theater-outbound/theater?theaterName={theaterName}";
         logger.info("final URL is " + finalUrl);
         ResponseEntity<String> response = restTemplate.getForEntity(finalUrl, String.class, theaterName);
         String responseBody = response.getBody();

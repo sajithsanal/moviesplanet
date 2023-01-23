@@ -2,6 +2,8 @@
 docker-compose build theaterinbound
 docker-compose build theateroutbound
 docker-compose build customeroutbound
+#minikube start
+minikube addons enable ingress
 minikube image load moviesplanet_theaterinbound
 minikube image load moviesplanet_theateroutbound
 minikube image load moviesplanet_customeroutbound
@@ -13,4 +15,4 @@ kubectl create -f theater-outbound/TheaterOutboundDeployment.yaml
 kubectl create -f theater-outbound/TheaterOutboundService.yaml
 kubectl create -f customer-outbound/CustomerOutboundDeployment.yaml
 kubectl create -f customer-outbound/CustomerOutboundService.yaml
-
+kubectl create -f ingress/ingress-resource.yaml
